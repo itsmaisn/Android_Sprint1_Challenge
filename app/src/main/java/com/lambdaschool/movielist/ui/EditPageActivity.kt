@@ -15,9 +15,9 @@ class EditPageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_page)
 
         save_button.setOnClickListener {
-            var intentAddMovie = Intent()
-            intentAddMovie.putExtra("movie",createMovie())
-            setResult(Activity.RESULT_OK,intentAddMovie)
+            var intentSaveMovie = Intent()
+            intentSaveMovie.putExtra("movie", createMovie())
+            setResult(RESULT_OK,intentSaveMovie)
             finish()
         }
 
@@ -31,7 +31,7 @@ class EditPageActivity : AppCompatActivity() {
         movie_title.setText(movie.title)
     }
 
-    fun createMovie():Movie {
+    fun createMovie(): Movie {
         var newMovie = Movie(movie_title.text.toString())
         return newMovie
     }
