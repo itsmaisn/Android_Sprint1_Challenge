@@ -21,6 +21,13 @@ class EditPageActivity : AppCompatActivity() {
             finish()
         }
 
+        delete_button.setOnClickListener{
+            var intentDeleteMovie = Intent()
+            intentDeleteMovie.putExtra("movie", deleteMovie())
+            setResult(RESULT_CANCELED, intentDeleteMovie)
+            finish()
+        }
+
         var bundle: Bundle? = intent.extras
         if (bundle != null) {
             loadMovie(bundle!!.getSerializable("tvMovie") as Movie)
@@ -34,5 +41,10 @@ class EditPageActivity : AppCompatActivity() {
     fun createMovie(): Movie {
         var newMovie = Movie(movie_title.text.toString())
         return newMovie
+    }
+
+    fun deleteMovie(): Movie {
+        var deleteMovie = Movie(movie_title.text.toString())
+        return deleteMovie
     }
 }
