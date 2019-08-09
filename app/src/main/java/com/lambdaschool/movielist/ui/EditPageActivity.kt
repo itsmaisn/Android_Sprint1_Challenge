@@ -22,7 +22,7 @@ class EditPageActivity : AppCompatActivity() {
         }
 
         var bundle: Bundle? = intent.extras
-        if(bundle != null) {
+        if (bundle != null) {
             loadMovie(bundle!!.getSerializable("tvMovie") as Movie)
         }
     }

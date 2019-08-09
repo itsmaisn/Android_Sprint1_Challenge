@@ -15,7 +15,7 @@ class ListPageActivity : AppCompatActivity() {
     //var counter = 0
 
     companion object {
-        const val REQUEST_CODE_EDIT_MOVIE = 1000
+        const val REQUEST_CODE_EDIT_MOVIE = 2
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class ListPageActivity : AppCompatActivity() {
 
         newMovieView.setOnClickListener {
             var tvIntent = Intent(this, EditPageActivity::class.java)
-            tvIntent.putExtra("movieKey", movieList[newMovieView.id])
+            tvIntent.putExtra("tvMovie", movieList[newMovieView.id])
             movieList.removeAt(newMovieView.id)
             startActivityForResult(tvIntent, REQUEST_CODE_EDIT_MOVIE)
         }
