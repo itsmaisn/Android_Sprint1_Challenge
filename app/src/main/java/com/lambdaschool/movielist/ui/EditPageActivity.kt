@@ -4,11 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.CompoundButton
 import com.lambdaschool.movielist.R
 import com.lambdaschool.movielist.model.Movie
 import kotlinx.android.synthetic.main.activity_edit_page.*
 
 class EditPageActivity : AppCompatActivity() {
+
+    private var watched = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,15 +20,19 @@ class EditPageActivity : AppCompatActivity() {
         save_button.setOnClickListener {
             var intentSaveMovie = Intent()
             intentSaveMovie.putExtra("movie", createMovie())
-            setResult(RESULT_OK,intentSaveMovie)
+            setResult(RESULT_OK, intentSaveMovie)
             finish()
         }
 
-        delete_button.setOnClickListener{
+        delete_button.setOnClickListener {
             var intentDeleteMovie = Intent()
             intentDeleteMovie.putExtra("movie", deleteMovie())
             setResult(RESULT_CANCELED, intentDeleteMovie)
             finish()
+        }
+
+        watched_switch.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
+            watched = b
         }
 
         var bundle: Bundle? = intent.extras
@@ -39,12 +46,10 @@ class EditPageActivity : AppCompatActivity() {
     }
 
     fun createMovie(): Movie {
-        var newMovie = Movie(movie_title.text.toString())
-        return newMovie
+        return Movie(movie_title.text.toString(), watched)
     }
 
     fun deleteMovie(): Movie {
-        var deleteMovie = Movie(movie_title.text.toString())
-        return deleteMovie
+        return Movie(movie_title.text.toString(), watched)
     }
 }

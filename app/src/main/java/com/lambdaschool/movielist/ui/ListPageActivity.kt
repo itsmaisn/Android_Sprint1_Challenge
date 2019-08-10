@@ -2,6 +2,7 @@ package com.lambdaschool.movielist.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -12,7 +13,6 @@ import kotlinx.android.synthetic.main.activity_list_page.*
 class ListPageActivity : AppCompatActivity() {
 
     var movieList = mutableListOf<Movie>()
-    //var counter = 0
 
     companion object {
         const val REQUEST_CODE_EDIT_MOVIE = 2
@@ -45,6 +45,9 @@ class ListPageActivity : AppCompatActivity() {
         newMovieView.textSize = 24f
         newMovieView.id = index
         newMovieView.text = movie.title
+        if (movieList[index].watched) {
+            newMovieView.paintFlags = newMovieView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        }
 
         newMovieView.setOnClickListener {
             var tvIntent = Intent(this, EditPageActivity::class.java)
@@ -59,10 +62,6 @@ class ListPageActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_EDIT_MOVIE && resultCode == Activity.RESULT_OK) {
             val newResultMovie = data!!.getSerializableExtra("movie") as Movie
             movieList.add(newResultMovie)
-            //ll_movie_list.addView(createTextView(newResultMovie, counter))
-            //counter++
         }
     }
 }
-
-//movie list lines up (activity lifecycle)
